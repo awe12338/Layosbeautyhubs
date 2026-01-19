@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LAYOS BEAUTY HUB | Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+  
+/* ================= GLOBAL ================= */
+ body { font-family: "Poppins", sans-serif; }
+    h1,h2,h3,h4 { font-family: "Playfair Display", serif; }
+    .shadow-fade { box-shadow: 0 10px 40px rgba(0,0,0,0.22); }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6b4eff;
+  --secondary: #9a8cff;
+  --bg: #f6f4ff;
+  --dark: #222;
+  --white: #fff;
+  --blue: #1f4fff;
+  --rose: #fb607f;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ================= HEADER ================= */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color:  rgba(5, 5, 247, 0.705);
+  text-decoration: none;
+}
+
+.logo p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -3px;
+}
+
+/* ================= NAV LINKS ================= */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  font-weight: 500;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--rose);
+}
+
+/* ================= HAMBURGER ================= */
+.hamburger-btn {
+  font-size: 1.4rem;
+  background: rgb(255, 255, 255);
+  color: #0a0000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.hamburger-btn:hover {
+  background: blue;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* ================= MOBILE MENU ================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  padding: 90px 20px 20px 20px;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+/* CANCEL BUTTON */
+.mobile-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.mobile-close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* MOBILE NAV LINKS */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color:rgba(5, 5, 247, 0.705);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: transform 0.25s ease, background 0.25s ease;
+  position: relative;
+}
+
+.mobile-nav a:hover {
+  background: #eef3ff;
+  transform: translateX(6px);
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ================= HERO ================= */
+.hero {
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: rgba(5, 5, 247, 0.705);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  padding: 14px 34px;
+  border-radius: 30px;
+  background: rgba(5, 5, 247, 0.705);;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.btn-outline {
+  padding: 14px 34px;
+  border-radius: 30px;
+  border: 2px solid var(--primary);
+  color: rgba(5, 5, 247, 0.705);;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.hero img {
+  width: 100%;
+  border-radius: 22px;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.hero img:hover {
+  transform: scale(1.05);
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  padding: 90px 24px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  color: rgba(5, 5, 247, 0.705);
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #555;
+}
+
+/* ================= GALLERY ================= */
+.gallery {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: transform 0.5s;
+}
+
+.gallery img:hover {
+  transform: scale(1.08);
+}
+
+/* ================= PRODUCTS ================= */
+.products {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 40px;
+}
+
+.product {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.product div {
+  padding: 20px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background:rgba(5, 5, 247, 0.705);
+  color: rgb(253, 252, 252);
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Swing animation */
+.swing {
+  transform-origin: top center;
+}
+
+.swing.show {
+  animation: swing 0.9s ease;
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(6deg); }
+  40%  { transform: rotate(-4deg); }
+  60%  { transform: rotate(3deg); }
+  80%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="logo.png" alt="Ayoola Cosmetics Logo">
+      <div>
+        <a href="index.html" class="text-4xl md:text-5xl font-bold text-blue-600">LAYOS BEAUTY HUB</a>
+        <p>Elegance • Glow • Confidence</p>
+      </div>
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://wa.me/+2349025863408" class="bg-rose text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">WhatsApp</a>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button id="mobileBtn" class="hamburger-btn md:hidden">☰</button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="mobileClose" class="mobile-close-btn">✕</button>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="exhibition.html">Exhibition</a>
+      <a href="explore.html">Explore</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+<div id="overlay" class="overlay"></div>
+
+</header>
+
+  <main class="max-w-4xl mx-auto py-16 px-6 fade-up">
+    <h1 class="text-4xl font-bold text-blue-600 mb-2 text-center">Contact Layo</h1>
+    <p class="text-gray-700 text-center mb-10">Have a question, a custom order, or want to collaborate? Reach out  we reply fast.</p>
+
+    <div class="grid md:grid-cols-2 gap-8">
+     <!-- Message Form -->
+<div class="bg-white p-6 rounded-2xl shadow-fade hover:shadow-lg transition">
+  <h3 class="font-semibold text-blue-600 text-lg mb-4">Message Us</h3>
+
+  <form id="whatsappForm" class="space-y-4">
+    <div>
+      <label class="text-sm font-medium">Your Name</label>
+      <input type="text" id="name" class="w-full border border-gray-300 p-3 rounded-lg mt-1" required>
+    </div>
+
+    <div>
+      <label class="text-sm font-medium">Email</label>
+      <input type="email" id="email" class="w-full border border-gray-300 p-3 rounded-lg mt-1" required>
+    </div>
+
+    <div>
+      <label class="text-sm font-medium">Message</label>
+      <textarea id="message" rows="6" class="w-full border border-gray-300 p-3 rounded-lg mt-1" required></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition w-full">
+      Send Message
+    </button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const phoneNumber = "+2349025863408"; // 🔴 Replace with Layo's WhatsApp number (no +)
+
+    const text = `Hello Layo, I am from your site.%0A%0AName: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${text}`;
+
+    window.open(whatsappURL, "_blank");
+  });
+</script>
+
+
+      <!-- Other Contact Info -->
+      <div class="bg-white p-6 rounded-2xl shadow-fade hover:shadow-lg transition">
+        <h3 class="font-semibold text-blue-600 text-lg mb-4">Other Ways to Reach Us</h3>
+        <p class="mt-3 text-gray-700">WhatsApp: <a href="https://wa.me/+2349025863408" class="text-blue-600">+234 902 586 3408</a></p>
+        <p class="mt-2 text-gray-700">Email: <a href="mailto:shobayooluwadarasimi7@gmail.com" class="text-blue-600">shobayooluwadarasimi7@gmail.com</a></p>
+        <p class="mt-2 text-gray-700">Tiktok: <a href="https://tiktok.com/layosbeautyhub1" class="text-blue-600">layosbeautyhub1</a></p>
+
+        <div class="mt-6">
+          <h4 class="font-semibold text-blue-600">Visit Our Store</h4>
+          <p class="text-sm text-gray-600 mt-1">Shop address:  Lambe, Akute, Lagos</p>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="https://wa.me/+2349025863408" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-600 hover:scale-105 transition inline-block">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 bg-blue text-white-400 text-center py-6">
+    <p>© 2025  Layos Beauty Hub | Crafted with Elegance</p>
+    <p class="mt-2 text-sm">All rights reserved | Developed by VT DESIGN</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+  const btn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeBtn = document.getElementById('mobileClose');
+  const overlay = document.getElementById('overlay');
+
+  // Open menu
+  btn.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  // Close menu
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  // Close when clicking overlay
+  overlay.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  // Fade-up animation
+  const fadeElements = document.querySelectorAll('.fade-up, .swing');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeElements.forEach(el => observer.observe(el));
+
+
+    
+
+  </script>
+
+</body>
+</html>

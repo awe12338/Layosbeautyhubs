@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layos Beauty Hub | Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#f5f3ff,#4f46e5,#1e1b4b);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:sticky;
+  top:0;
+  background:#fff;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+  z-index:100;
+}
+
+.navbar h1{
+  font-size:18px;
+  font-weight:700;
+  color:#1f4fff;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,.18);
+}
+
+/* ===== LOGIN ===== */
+#loginPanel{
+  max-width:380px;
+  margin:80px auto;
+  text-align:center;
+}
+
+#loginPanel input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-bottom:14px;
+}
+
+#loginPanel button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ===== FORM ===== */
+input,select,button{
+  font-family:Poppins,sans-serif;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-bottom:12px;
+}
+
+button{
+  padding:12px 16px;
+  border-radius:12px;
+  border:none;
+  background:#4f46e5;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* ===== PRODUCT LIST ===== */
+.product-item{
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:14px;
+  align-items:start;
+  background:#f9fafb;
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:16px;
+}
+
+.product-item img{
+  width:70px;
+  height:70px;
+  border-radius:12px;
+  object-fit:cover;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.actions button{
+  font-size:13px;
+  padding:8px 12px;
+}
+
+.hide{background:#f59e0b}
+.delete{background:#dc2626}
+
+/* ===== DESKTOP ===== */
+@media(min-width:768px){
+  .product-item{
+    grid-template-columns:80px 1fr 180px;
+    align-items:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <h1>Layos Beauty Hub — Admin</h1>
+</div>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginPanel" class="card">
+  <h2>Admin Login</h2>
+  <input type="password" id="password" placeholder="Enter admin password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none">
+
+  <!-- ADD PRODUCT -->
+  <div class="card">
+    <h2>Add Product</h2>
+
+    <input id="name" placeholder="Product name">
+    <input type="file" id="imageFile" accept="image/*">
+
+    <select id="category">
+      <option>Skin Care</option>
+      <option>Hair Care</option>
+      <option>Makeup</option>
+      <option>Jewelries</option>
+    </select>
+
+    <button onclick="addProduct()">Add Product</button>
+  </div>
+
+  <!-- PRODUCT LIST -->
+  <div class="card">
+    <h2>All Products</h2>
+    <div id="adminList"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* ===== CONFIG ===== */
+const PASSWORD = "layos123";
+const STORAGE_KEY = "products";
+
+/* ===== ELEMENTS ===== */
+const loginPanel = document.getElementById("loginPanel");
+const adminPanel = document.getElementById("adminPanel");
+const adminList = document.getElementById("adminList");
+
+/* ===== DATA ===== */
+let products = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+/* ===== LOGIN ===== */
+function login(){
+  const pass = document.getElementById("password").value;
+  if(pass === PASSWORD){
+    loginPanel.style.display="none";
+    adminPanel.style.display="block";
+    renderAdmin();
+  }else{
+    alert("Wrong password");
+  }
+}
+
+/* ===== SAVE ===== */
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  renderAdmin();
+}
+
+/* ===== ADD ===== */
+function addProduct(){
+  const name = document.getElementById("name").value.trim();
+  const file = document.getElementById("imageFile");
+  const category = document.getElementById("category").value;
+
+  if(!name || file.files.length === 0){
+    alert("Fill all fields");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    products.push({
+      id: Date.now(),
+      name,
+      image: e.target.result,
+      category,
+      visible: true
+    });
+    save();
+    document.getElementById("name").value="";
+    file.value="";
+  };
+  reader.readAsDataURL(file.files[0]);
+}
+
+/* ===== RENDER ===== */
+function renderAdmin(){
+  adminList.innerHTML = "";
+  products.forEach(p=>{
+    adminList.innerHTML += `
+      <div class="product-item">
+        <img src="${p.image}">
+        <div>
+          <input value="${p.name}" onchange="editName(${p.id},this.value)">
+          <select onchange="editCategory(${p.id},this.value)">
+            <option ${p.category=="Skin Care"?"selected":""}>Skin Care</option>
+            <option ${p.category=="Hair Care"?"selected":""}>Hair Care</option>
+            <option ${p.category=="Makeup"?"selected":""}>Makeup</option>
+            <option ${p.category=="Jewelries"?"selected":""}>Jewelries</option>
+          </select>
+
+          <input type="file" accept="image/*" onchange="editImage(${p.id},this)">
+        </div>
+
+        <div class="actions">
+          <button class="hide" onclick="toggle(${p.id})">
+            ${p.visible ? "Hide" : "Show"}
+          </button>
+          <button class="delete" onclick="removeItem(${p.id})">
+            Delete
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* ===== EDIT ===== */
+function toggle(id){
+  const p = products.find(x=>x.id===id);
+  p.visible = !p.visible;
+  save();
+}
+
+function removeItem(id){
+  products = products.filter(p=>p.id!==id);
+  save();
+}
+
+function editName(id,val){
+  products.find(p=>p.id===id).name = val;
+  save();
+}
+
+function editCategory(id,val){
+  products.find(p=>p.id===id).category = val;
+  save();
+}
+
+function editImage(id,input){
+  if(!input.files.length) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    products.find(p=>p.id===id).image=e.target.result;
+    save();
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+</script>
+
+</body>
+</html>

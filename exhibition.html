@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAYOS BEAUTY HUB | Shop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ================= GLOBAL ================= */
+
+ body { font-family: "Poppins", sans-serif; }
+    h1,h2,h3,h4 { font-family: "Playfair Display", serif; }
+    .shadow-fade { box-shadow: 0 10px 40px rgba(0,0,0,0.22); }
+   
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6b4eff;
+  --secondary: #9a8cff;
+  --bg: #f6f4ff;
+  --dark: #222;
+  --white: #fff;
+  --blue: #1f4fff;
+  --rose: #fb607f;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ================= HEADER ================= */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color:  rgba(5, 5, 247, 0.705);
+  text-decoration: none;
+}
+
+.logo p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -3px;
+}
+
+/* ================= NAV LINKS ================= */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  font-weight: 500;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--rose);
+}
+
+/* ================= HAMBURGER ================= */
+.hamburger-btn {
+  font-size: 1.4rem;
+  background: rgb(255, 255, 255);
+  color: #0a0000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.hamburger-btn:hover {
+  background: blue;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* ================= MOBILE MENU ================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  padding: 90px 20px 20px 20px;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+/* CANCEL BUTTON */
+.mobile-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.mobile-close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* MOBILE NAV LINKS */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color:rgba(5, 5, 247, 0.705);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: transform 0.25s ease, background 0.25s ease;
+  position: relative;
+}
+
+.mobile-nav a:hover {
+  background: #eef3ff;
+  transform: translateX(6px);
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ================= HERO ================= */
+.hero {
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: rgba(5, 5, 247, 0.705);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  padding: 14px 34px;
+  border-radius: 30px;
+  background: rgba(5, 5, 247, 0.705);;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.btn-outline {
+  padding: 14px 34px;
+  border-radius: 30px;
+  border: 2px solid var(--primary);
+  color: rgba(5, 5, 247, 0.705);;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.hero img {
+  width: 100%;
+  border-radius: 22px;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.hero img:hover {
+  transform: scale(1.05);
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  padding: 90px 24px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  color: rgba(5, 5, 247, 0.705);
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #555;
+}
+
+/* ================= GALLERY ================= */
+.gallery {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: transform 0.5s;
+}
+
+.gallery img:hover {
+  transform: scale(1.08);
+}
+
+/* ================= PRODUCTS ================= */
+.products {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 40px;
+}
+
+.product {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.product div {
+  padding: 20px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background:rgba(5, 5, 247, 0.705);
+  color: rgb(253, 252, 252);
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Swing animation */
+.swing {
+  transform-origin: top center;
+}
+
+.swing.show {
+  animation: swing 0.9s ease;
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(6deg); }
+  40%  { transform: rotate(-4deg); }
+  60%  { transform: rotate(3deg); }
+  80%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+/* ===== CUSTOMER SUPPORT FLOATING ICON ===== */
+.support-call {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  background: #1f4fff;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  z-index: 2000;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.support-call:hover {
+  background: #0f2fe0;
+  transform: scale(1.08);
+}
+
+/* Mobile touch comfort */
+@media (max-width: 640px) {
+  .support-call {
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+</style>
+</head>
+<!-- CUSTOMER SUPPORT CALL BUTTON -->
+<a href="tel:+2349025863408" class="support-call" aria-label="Call Customer Support">
+  📞
+</a>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="logo.png" alt="Ayoola Cosmetics Logo">
+      <div>
+        <a href="index.html" class="text-4xl md:text-5xl font-bold text-blue-600">LAYOS BEAUTY HUB</a>
+        <p>Elegance • Glow • Confidence</p>
+      </div>
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://wa.me/2348038137679" class="bg-rose text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">WhatsApp</a>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button id="mobileBtn" class="hamburger-btn md:hidden">☰</button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="mobileClose" class="mobile-close-btn">✕</button>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="exhibition.html">Exhibition</a>
+      <a href="explore.html">Explore</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+</header>
+
+<!-- SEARCH / FILTER -->
+<main class="max-w-7xl mx-auto py-10 px-4">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6  fade-up">
+    <h1 class="text-3xl font-bold text-blue-600">Layos Beauty Hub  Accessories & Luxury jewelries</h1>
+    <div class="flex gap-3 items-center">
+      <input id="searchBox" type="search" placeholder="Search product name or number" class="p-3 rounded-lg border border-gray-300 w-64" />
+      <select id="categoryFilter" class="p-3 rounded-lg border border-gray-300">
+        <option value="all">All categories</option>
+        <option value="accessory">Accessory</option>
+        <option value="luxury">Luxury jewelries</option>
+        <option value="gift">Make up Kits</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- PRODUCTS GRID -->
+  <section id="products" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 products-grid fade-up"></section>
+
+  <!-- PRODUCT VIDEOS -->
+  <section id="productVideos" class="mt-16">
+    <h2 class="text-2xl font-bold text-blue-600 mb-6  fade-up">🎥 Product Videos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Example Video Items -->
+         <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+        <video class="w-full h-56 object-cover" controls>
+          <source src="chain.mp4" type="video/mp4">
+          Your browser does not support video.
+        </video>
+        <div class="p-3 swing.show"><h3 class="font-semibold text-sm">FOR YOUR BABE</h3></div>
+         <button onclick="messageWhatsApp('FOR YOUR BABE')" class="mt-2 bg-blue-600 text-white px-3 py-1 text-xs square hover:bg-blue-700">Message</button>
+      </div>
+      <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+        <video class="w-full h-56 object-cover" controls>
+          <source src="bottles.mp4" type="video/mp4">
+          Your browser does not support video.
+        </video>
+        <div class="p-3  swing.show"><h3 class="font-semibold text-sm">GIFT FOR YOUR QUEEN</h3></div>
+         <button onclick="messageWhatsApp('GIFT OR MAMA')" class="mt-2 bg-blue-600 text-white px-3 py-1 text-xs square hover:bg-blue-700">Message</button>
+      </div>
+          <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+        <video class="w-full h-56 object-cover" controls>
+          <source src="scam.mp4" type="video/mp4">
+          Your browser does not support video.
+        </video>
+        <div class="p-3  swing.show"><h3 class="font-semibold text-sm">LUXURY JEWELS FOR HER</h3></div>
+         <button onclick="messageWhatsApp('LUXURY FOR HER')" class="mt-2 bg-blue-600 text-white px-3 py-1 text-xs square hover:bg-blue-700">Message</button>
+      </div>
+  </section>
+</main>
+
+<!-- DISCOUNT SLIDEOUT -->
+<div id="discountSidebar" class="fixed top-1/4 right-[-260px] w-64 bg-blue-50 p-4 rounded-l-2xl shadow-lg z-50 swing.show">
+  <div class="flex justify-between items-center mb-2   swing.show">
+    <h3 class="text-blue-600 font-semibold text-center flex-1  swing.show">Special Discounts</h3>
+    <button id="discountToggle" class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition swing.show">×</button>
+  </div>
+  <div id="discountProducts" class="flex flex-col gap-3 overflow-y-auto max-h-[500px]"></div>
+</div>
+<button id="discountShowBtn" class="fixed top-1/4 right-0 bg-blue-600 text-white px-3 py-2 rounded-l-lg z-50 shadow hover:bg-blue-700 transition  swing.show"></button>
+
+<footer class="bg-blue mt-12 py-6 text-center text-white-500">
+  © 2025 LAYOS BEAUTY HUB | All Rights Reserved | Developed by VT DESIGN
+</footer>
+
+<script>
+const productsEl = document.getElementById('products');
+const searchBox = document.getElementById('searchBox');
+const categoryFilter = document.getElementById('categoryFilter');
+const discountSidebar = document.getElementById('discountSidebar');
+const discountToggle = document.getElementById('discountToggle');
+const discountShowBtn = document.getElementById('discountShowBtn');
+const discountProductsEl = document.getElementById('discountProducts');
+
+const allProducts = [
+  {id:'01', name:'Silver Necklace', category:'accessory', img:'neckar.jpg'}, 
+  {id:'02', name:'Cross chain', category:'accessory', img:'cross.jpg'},
+  {id:'03', name:'Necklace/bracelet', category:'accessory', img:'brace.jpg'},
+  {id:'04', name:'Silver star chain', category:'luxury', img:'star.jpg'},
+  {id:'05', name:'Star gold necklace', category:'luxury', img:'butter.jpg'}, 
+  {id:'06', name:'Pendal Necklace', category:'accessory', img:'cat.jpg'},
+  {id:'07', name:'Butterfly Gold necklace', category:'accessory', img:'alot.jpg'},
+  {id:'08', name:'White cross necklace', category:'accessory', img:'gold.jpg'},
+  {id:'09', name:'Silver chain', category:'luxury', img:'silv.jpg'},
+  {id:'10', name:'Black pendal necklace', category:'gift', img:'lly.jpg'},
+  {id:'11', name:'Gold earings', category:'luxury', img:'rings.jpg',},
+  {id:'12', name:'silver cat pendal', category:'accessory', img:'cats.jpg'},
+  {id:'13', name:'Gold ring/necklace jewel', category:'accessory', img:'coss.jpg'}, {id:'14', name:'Bead Braclet', category:'luxury', img:'base.jpg'}, {id:'15', name:'Beads Necklace/Bracelet', category:'accessory', img:'ank.jpg'}, {id:'16', name:'  bead Necklace', category:'gift', img:'bll.jpg'}, {id:'17', name:'Pink lip gloss', category:'luxury', img:'pink.jpg'}, {id:'18', name:'Eye paint', category:'accessory', img:'black.jpg'}, {id:'19', name:'foundation foam', category:'accessory', img:'oam.jpg'}, {id:'20', name:'Make up Brush', category:'gift', img:'ush.jpg'}, {id:'21', name:'Blue make up brush', category:'luxury', img:'ue.jpg'}, {id:'22', name:'make up powder', category:'luxury', img:'upac.jpg'}, {id:'23', name:'Heart Gold necklace ', category:'accessory', img:'eight.jpg'}, {id:'24', name:'Beads Anklet', category:'accessory', img:'bead.jpg'}, {id:'25', name:'cross gold chain', category:'accessory', img:'gold.jpg'}, {id:'26', name:'Gold earings', category:'luxury', img:'ring.jpg'}, {id:'27', name:'Gold bracelet', category:'gift', img:'hand.jpg'}, {id:'28', name:'Multi Gold earings', category:'luxury', img:'pack.jpg'}, {id:'29', name:'Gold hand bracelet', category:'accessory', img:'let.jpg'}, {id:'30', name:'Bead/Gold chain', category:'accessory', img:'ack.jpg'},
+];
+
+// Discounted product prices
+const discountProducts = [
+  {id:'01', name:'Pimple patch', price:2500, img:'clipp.jpg', original: 3500},
+  {id:'02', name:'Black Bands', price:700, img:'bands.jpg', original: 1200},
+  {id:'03', name:'Scrunchie', price:1000, img:'puns.jpg', original: 1500},
+  {id:'04', name:'Head Claw', price:3500, img:'largeclaw.jpg', original: 5000},
+  {id:'07', name:'Beads Bracelet', price:3500, img:'beads.jpg', original: 4500},
+  {id:'05', name:'Rings', price:3000, img:'sun.jpg', original: 4000},
+];
+
+function renderProducts() {
+  productsEl.innerHTML = '';
+  const cat = categoryFilter.value;
+  const q = searchBox.value.trim().toLowerCase();
+
+  const filtered = allProducts.filter(p=>{
+    const matchesCat = cat==='all' || p.category===cat;
+    const matchesQ = !q || p.name.toLowerCase().includes(q);
+    return matchesCat && matchesQ;
+  });
+
+  filtered.forEach(p=>{
+    const card = document.createElement('article');
+    card.className = 'relative bg-white rounded-lg shadow fade-up hover:shadow-lg transition';
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.name}" class="w-full h-44 object-cover hover-zoom">
+      <div class="p-3">
+        <h3 class="font-medium text-sm mb-1">${p.name}</h3>
+        <p class="text-sm font-semibold text-gray-800">₦${p.price}</p>
+        <div class="flex justify-end mt-2">
+          <button onclick="messageWhatsApp('${p.name}')" class="text-xs bg-blue-600 text-white px-3 py-1 rounded">Message</button>
+        </div>
+      </div>
+    `;
+    productsEl.appendChild(card);
+  });
+
+  document.querySelectorAll('.fade-up').forEach(el=>{
+    setTimeout(()=>el.classList.add('show'), 60);
+  });
+}
+
+function renderDiscounts() {
+  discountProductsEl.innerHTML = '';
+  discountProducts.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-lg shadow p-2 flex gap-2 items-center hover:shadow-lg transition';
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.name}" class="w-16 h-16 object-cover rounded">
+      <div class="flex-1">
+        <h4 class="text-sm font-medium">${p.name}</h4>
+        <p class="text-xs text-blue-600 font-semibold">₦${p.price}</p>
+      </div>
+      <button onclick="messageWhatsApp('${p.name}')" class="text-xs bg-blue-600 text-white px-2 py-1 rounded">Message</button>
+    `;
+    discountProductsEl.appendChild(card);
+  });
+}
+
+function messageWhatsApp(productName){
+  const text = `Hello Layo, I'm interested in "${productName}". Please send details.`;
+  window.open(`https://wa.me/+2349025863408?text=${encodeURIComponent(text)}`,'_blank');
+}
+
+searchBox.addEventListener('input', renderProducts);
+categoryFilter.addEventListener('change', renderProducts);
+renderProducts();
+renderDiscounts();
+
+// Discount sidebar toggle
+discountToggle.addEventListener('click', ()=>{
+  discountSidebar.style.right = '-260px';
+  discountShowBtn.style.display = 'block';
+});
+discountShowBtn.addEventListener('click', ()=>{
+  discountSidebar.style.right = '0';
+  discountShowBtn.style.display = 'none';
+});
+// Mobile menu toggle
+  const btn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeBtn = document.getElementById('mobileClose');
+  const overlay = document.getElementById('overlay');
+
+  btn.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  const animatedElements = document.querySelectorAll(
+  '.fade-up, .swing'
+);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.15 });
+
+animatedElements.forEach(el => observer.observe(el));
+
+</script>
+
+</body>
+</html>

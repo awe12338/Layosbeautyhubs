@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LAYOS BEAUTY HUB | About</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Poppins", sans-serif; }
+    h1,h2,h3,h4 { font-family: "Playfair Display", serif; }
+    .shadow-fade { box-shadow: 0 10px 40px rgba(0,0,0,0.22); }
+    .fade-up { opacity: 0; transform: translateY(25px); transition: all 0.85s ease; }
+    .fade-up.show { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-30px); transition: all 0.9s ease; }
+    .fade-left.show { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(30px); transition: all 0.9s ease; }
+    .fade-right.show { opacity: 1; transform: translateX(0); }
+    .muted { color: #6b6b6b; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo img { width: 40px; height: 40px; border-radius: 50%; }
+    .logo a { font-size: 1.5rem; font-weight: 700; color: rgba(5, 5, 247, 0.705); text-decoration: none; }
+    .logo p { font-size: 0.85rem; color: #666; margin-top: -3px; }
+
+    /* NAV LINKS */
+    .nav-links { display: flex; gap: 30px; font-weight: 500; }
+    .nav-links a { text-decoration: none; color: #444; transition: color 0.3s; }
+    .nav-links a:hover { color: #e11d48; } /* rose-600 */
+
+    /* HAMBURGER */
+    .hamburger-btn {
+      font-size: 1.4rem;
+      background: rgb(255, 255, 255);
+      color: #0a0000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .hamburger-btn:hover { background:  rgba(5, 5, 247, 0.705); transform: scale(1.05); }
+
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: #fff;
+      padding: 90px 20px 20px 20px;
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-menu.active { transform: translateX(0); }
+
+    /* CLOSE BUTTON */
+    .mobile-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      background: transparent;
+      border: none;
+      color: #000;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+    .mobile-close-btn:hover { transform: scale(1.2); }
+
+    .mobile-nav { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+    .mobile-nav a {
+      text-decoration: none;
+      color:  rgba(5, 5, 247, 0.705);
+      font-weight: 600;
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: transform 0.25s ease, background 0.25s ease;
+      position: relative;
+    }
+    .mobile-nav a:hover { background: #eef3ff; transform: translateX(6px); }
+
+    /* OVERLAY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+/* ================= FOOTER ================= */
+footer {
+  background:rgba(5, 5, 247, 0.705);
+  color: rgb(253, 252, 252);
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9rem;
+}
+
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-skyblue-100 text-gray-900">
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="logo.png" alt="Ayoola Cosmetics Logo">
+      <div>
+        <a href="index.html" class="text-4xl md:text-5xl font-bold text-blue-600 ">LAYOS BEAUTY HUB</a>
+        <p>Elegance • Glow • Confidence</p>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://wa.me/2348038137679" class="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">WhatsApp</a>
+    </nav>
+
+    <button id="mobileBtn" class="hamburger-btn md:hidden">☰</button>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="mobileClose" class="mobile-close-btn">✕</button>
+    <nav class="mobile-nav">
+     <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="exhibition.html">Exhibition</a>
+      <a href="explore.html">Explore</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+  <div id="overlay" class="overlay"></div>
+</header>
+
+<main class="max-w-7xl mx-auto relative z-10">
+
+
+  <!-- Your existing content sections go here... -->
+
+  
+  <!-- HERO / MAIN INTRO -->
+  <main class="max-w-7xl mx-auto">
+    <section class="grid md:grid-cols-2 gap-8 items-center py-14 px-6" style="background-color: #ebf4ff;">
+      <div class="fade-left">
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-600 leading-tight">About Layos<br> Beauty Hub</h1>
+        <p class="mt-4 text-gray-700 text-lg leading-relaxed">
+          Layos Beauty Hub is built on a quiet confidence the kind that understands beauty is personal, intentional, and powerful.
+          Founded with a belief in refined craftsmanship, our collections blend ethically sourced ingredients, careful formulation, and an aesthetic that feels both modern and timeless.
+          We design for women who seek understated luxury: pieces and products that enhance, not overpower.
+        </p>
+
+        <p class="mt-4 text-gray-700">
+          From our first small batch of lip balms created in a home kitchen, to a full line of perfumes and jewelry collections,
+          Layo's journey is the result of curiosity, patient practice, and a commitment to quality. We prioritize skinfriendly formulations,
+          elegant finishing, and packaging that transforms ordinary routines into moments of selfcare.
+        </p>
+
+        <div class="mt-6 flex gap-3">
+          <a href="exhibition.html" class="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition">View Collections</a>
+          <a href="contact.html" class="text-blue-600 px-4 py-3 rounded-lg border border-blue-600 hover:bg-blue-50 transition">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="fade-right">
+        <img src="about.jpeg" alt="Ayoola founder" class="w-full rounded-2xl shadow-fade object-cover h-80 hover:scale-105 transition duration-700">
+      </div>
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="bg-white rounded-lg mx-6 p-10 mt-6 fade-up" style="background-color: #ebf4ff;">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold text-blue-600">Our Mission & Vision</h2>
+        <p class="mt-4 text-gray-700 leading-relaxed">
+          Our mission is to empower women to feel confident and elegant through beautifully made products,perfumes that linger, cosmetics that flatter,
+          and jewelry that complements. We envision a community where beauty is inclusive, sustainable, and thoughtfully crafted.
+          Each product is an invitation to ritual and confidence.
+        </p>
+
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="p-6 border rounded-lg">
+            <h4 class="font-semibold text-blue-600">Quality</h4>
+            <p class="mt-2 muted">We test and select ingredients that meet safety and performance standards so our customers can trust every product.</p>
+          </div>
+          <div class="p-6 border rounded-lg">
+            <h4 class="font-semibold text-blue-600">Sustainability</h4>
+            <p class="mt-2 muted">We pursue recyclable packaging, refill plans, and fair sourcing where possible to reduce environmental impact.</p>
+          </div>
+          <div class="p-6 border rounded-lg">
+            <h4 class="font-semibold text-blue-600">Community</h4>
+            <p class="mt-2 muted">Supporting local artisans and training small teams is part of our commitment to growing with the community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE CRAFT -->
+    <section class="max-w-6xl mx-auto py-12 px-6 fade-up"  style="background-color: #ebf4ff;">
+      <h2 class="text-2xl font-semibold text-blue-600 text-center">The Craft Behind Our Products</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-8 items-start">
+        <div>
+          <h3 class="font-semibold">Perfumes & Fragrances</h3>
+          <p class="mt-3 text-gray-700 leading-relaxed">
+            Each scent is developed to have depth and longevity. Our perfumers blend top, heart and base notes to create perfumes that evolve with wear.
+            We source sustainably and prioritize natural extracts where they enhance the composition.
+          </p>
+
+          <h3 class="font-semibold mt-6">Cosmetics & Makeup</h3>
+          <p class="mt-3 text-gray-700 leading-relaxed">
+            Pigments are calibrated for rich payoff and skinfriendly formulas. Foundations and concealers are matched to diverse skin tones;
+            lip colors and palettes are curated to feel luxurious and wearable.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold">Jewelry & Finishing</h3>
+          <p class="mt-3 text-gray-700 leading-relaxed">
+            Our jewelry pieces are designed to be complementary and longlasting. Metals and stones are selected for durability and elegant finish.
+            Each piece undergoes hand inspection before it reaches the collection shelf.
+          </p>
+
+          <h3 class="font-semibold mt-6">Packaging & Experience</h3>
+          <p class="mt-3 text-gray-700 leading-relaxed">
+            Presentation matters: boxes, labels and unboxing are crafted to make customers feel celebrated. We aim for a minimalist, refined aesthetic.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE / JOURNEY -->
+    <section class="bg-white rounded-lg mx-6 p-10 mt-6 fade-up" style="background-color: #ebf4ff;">
+      <h2 class="text-2xl font-semibold text-blue-600 text-center">Our Journey</h2>
+      <ol class="mt-6 space-y-6 list-decimal list-inside text-gray-700 max-w-4xl mx-auto">
+        <li>
+          <strong>Humble Beginnings:</strong> Small batch lip balms handcrafted and gifted to friends and family. Early feedback shaped our first formulas.
+        </li>
+        <li>
+          <strong>Local Launch:</strong> Popup markets and small boutiques helped Layo understand customer preferences and grow with intention.
+        </li>
+        <li>
+          <strong>Refinement:</strong> Collaboration with cosmetic formulators and packaging designers helped professionalize the line.
+        </li>
+        <li>
+          <strong>Expansion:</strong> Jewelry and perfume collections launched, along with small workshops for customers to learn product care.
+        </li>
+        <li>
+          <strong>Community:</strong> A customer first approach that listens and adapts  we continue to evolve with the women who wear our brand.
+        </li>
+      </ol>
+    </section>
+
+    <!-- SHOWCASE SMALL GALLERY -->
+    <section class="max-w-6xl mx-auto py-12 px-6 fade-up"  style="background-color: #ebf4ff;">
+      <h2 class="text-2xl font-semibold text-blue-600 mb-6 text-center">A Closer Look</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <img src="images/about-1.jpg" alt="detail 1" class="rounded-lg object-cover h-48 w-full shadow hover:scale-110 transition duration-500">
+        <img src="images/about-2.jpg" alt="detail 2" class="rounded-lg object-cover h-48 w-full shadow hover:scale-110 transition duration-500">
+        <img src="images/about-3.jpg" alt="detail 3" class="rounded-lg object-cover h-48 w-full shadow hover:scale-110 transition duration-500">
+        <img src="images/about-4.jpg" alt="detail 4" class="rounded-lg object-cover h-48 w-full shadow hover:scale-110 transition duration-500">
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL / TRUST -->
+    <section class="bg-rose-50 py-12 px-6 fade-up"  style="background-color: #ebf4ff;">
+      <div class="max-w-4xl mx-auto text-center">
+        <h3 class="text-xl font-semibold text-blue-600">Trusted by Women</h3>
+        <p class="mt-3 text-gray-700">
+          Our customers are at the heart of everything we do. Below are a few voices that inspire us to keep crafting with care.
+        </p>
+
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <p class="text-gray-700 italic">"Delicate, longlasting, and beautifully packaged. My new signature scent."</p>
+            <p class="mt-4 font-semibold"> Aminat A.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow">
+            <p class="text-gray-700 italic">"The jewelry is perfect for both daily wear and special occasions."</p>
+            <p class="mt-4 font-semibold"> Jumoke S.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow">
+            <p class="text-gray-700 italic">"I gifted a set to my sister  she loved the presentation and the quality."</p>
+            <p class="mt-4 font-semibold"> Blessing K.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+
+    <!-- CONTACT TEASER -->
+    <section class="max-w-6xl mx-auto py-10 px-6 fade-up" style="background-color: #ebf4ff;">
+      <div class="flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-lg shadow">
+        <div class="flex-1">
+          <h4 class="text-xl font-semibold text-blue-600">Have a question or custom request?</h4>
+          <p class="mt-2 muted">We respond quickly  message us on WhatsApp or send an email. We love bespoke orders and collaborations.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://wa.me/2348038137679" class="bg-green-500 text-white px-4 py-3 rounded-md hover:scale-105 transition">WhatsApp</a>
+          <a href="contact.html" class="bg-blue-600 text-white px-4 py-3 rounded-md hover:bg-blue-700 transition">Contact Page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <section class="grid md:grid-cols-2 gap-8 items-center py-14 px-6 fade-left"  style="background-color: #ebf4ff;">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-bold text-blue-600 leading-tight">About Layos Hub</h1>
+      <p class="mt-4 text-gray-700 text-lg leading-relaxed">Layos Hub is built on a quiet confidence …</p>
+      <div class="mt-6 flex gap-3">
+        <a href="exhibition.html" class="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-rose-700 transition">View Collections</a>
+        <a href="contact.html" class="text-blue-600 px-4 py-3 rounded-lg border border-blue-600 hover:bg-blue-50 transition">Contact Us</a>
+      </div>
+    </div>
+    
+  </section>
+</main>
+
+<footer class="bg-blue-600 text-white-1000 text-center py-6 mt-12" >
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <img src="logo.png" alt="logo" class="w-10 h-10 rounded-full inline-block">
+        <span class="ml-3">Layos Beauty Hub</span>
+      </div>
+      <div class="text-sm"></div>
+    </div>
+    <p class="mt-4 text-sm">© 2025 Ayoola Cosmetics.</p>
+    <p class="mt-2 text-sm">All rights reserved | Developed by VT DESIGN</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeBtn = document.getElementById('mobileClose');
+  const overlay = document.getElementById('overlay');
+
+  btn.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  // Animate on scroll
+  const fadeEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.2 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
