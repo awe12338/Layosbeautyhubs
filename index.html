@@ -49,8 +49,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ================= HEADER ================= */
-header{
+/header{
   position:sticky;
   top:0;
   background:rgba(255,255,255,.95);
@@ -81,7 +80,7 @@ header{
 
 .logo a{
   font-size:1.1rem;
-  font-weight:700;
+  font-weight:800;
   color:rgba(5,5,247,.8);
   text-decoration:none;
 }
@@ -114,12 +113,8 @@ header{
   background: blue;
   transform: scale(1.05);
 }
+    @media (max-width: 768px) { .nav-links { display: none; } }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-}
 
 /* ================= MOBILE MENU ================= */
 .mobile-menu {
@@ -555,6 +550,7 @@ swingEls.forEach(el => swingObserver.observe(el));
 
 </body>
 </html>
+
 
 
 
