@@ -365,6 +365,11 @@ footer {
   100% { transform: rotate(0deg); }
 }
 
+.fade-left,
+.fade-right {
+  will-change: transform;
+  backface-visibility: hidden;
+}
 
 </style>
 </head>
@@ -531,6 +536,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
