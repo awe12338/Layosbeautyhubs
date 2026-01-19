@@ -1,34 +1,449 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <!-- ✅ VERY IMPORTANT FOR MOBILE --> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Explore | Layo’s Beauty Hub</title> <script src="https://cdn.tailwindcss.com"></script> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> <style> *{box-sizing:border-box} body{ margin:0; font-family:Poppins,sans-serif; background:#f5f3ff; } /* ================= HEADER ================= */ header{ position:sticky; top:0; background:rgba(255,255,255,.95); backdrop-filter:blur(12px); z-index:1000; } .nav{ max-width:1200px; margin:auto; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; } .logo{ display:flex; align-items:center; gap:10px; } .logo img{ width:38px; height:38px; border-radius:50%; } .logo a{ font-size:1.1rem; font-weight:800; color:rgba(5,5,247,.8); text-decoration:none; } .logo p{ font-size:.75rem; color:#666; } /* Desktop nav */ .nav-links{ display:none; gap:26px; } .nav-links a{ text-decoration:none; color:#444; font-weight:600; } /* Hamburger */ .hamburger-btn{ font-size:1.6rem; background:none; border:none; cursor:pointer; } .hamburger-btn:hover { background: blue; transform: scale(1.05); } /* ================= MOBILE MENU ================= */ .mobile-menu{ position:fixed; top:0; left:0; width:260px; height:100vh; background:#fff; padding:80px 20px; transform:translateX(-100%); transition:.35s ease; z-index:1001; } .mobile-menu.active{ transform:translateX(0); } .mobile-close-btn{ position:absolute; top:16px; right:16px; font-size:1.4rem; background:none; border:none; } .mobile-nav{ display:flex; flex-direction:column; gap:14px; } .mobile-nav a{ padding:12px; border-radius:10px; font-weight:600; color:rgba(5,5,247,.8); text-decoration:none; } /* OVERLAY (❗ was missing before) */ .overlay{ position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:.3s; z-index:1000; } .overlay.active{ opacity:1; pointer-events:auto; } /* ================= PAGE ================= */ main{ max-width:1200px; margin:auto; padding:20px; } h1{ font-family:"Playfair Display",serif; font-size:5rem; font-weight:800; color:#1f4fff; margin-bottom:18px; } /* CONTROLS */ #controls{ display:flex; flex-direction:column; gap:12px; margin-bottom:22px; } #controls input, #controls select{ width:100%; padding:14px; border-radius:14px; border:1.5px solid #dcd9ff; } /* GRID */ #grid{ display:grid; grid-template-columns:1fr; gap:18px; } /* CARD */ .product-card{ background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,.12); } .product-card img{ width:100%; height:220px; object-fit:cover; } .card-body{ padding:16px; } .card-body h3{ font-size:1rem; font-weight:800; margin-bottom:12px; } .card-body button{ width:100%; padding:12px; border-radius:14px; background:#4f46e5; color:#fff; border:none; font-weight:700; } /* FOOTER */ footer{ background:rgba(5,5,247,.8); color:#fff; text-align:center; padding:22px; margin-top:40px; } /* ================= TABLET ================= */ @media(min-width:640px){ #grid{grid-template-columns:repeat(2,1fr)} } /* ================= DESKTOP ================= */ @media(min-width:768px){ .nav-links{display:flex} .hamburger-btn{display:none} #controls{flex-direction:row} } @media(min-width:1024px){ #grid{grid-template-columns:repeat(4,1fr)} } /* ===== SWING ANIMATION ===== */ .swing { transform-origin: top center; animation: swing 0.9s ease; } @keyframes swing { 0% { transform: rotate(0deg); } 20% { transform: rotate(6deg); } 40% { transform: rotate(-4deg); } 60% { transform: rotate(3deg); } 80% { transform: rotate(-2deg); } 100% { transform: rotate(0deg); } } /* ===== CUSTOMER SUPPORT FLOATING ICON ===== */ .support-call { position: fixed; bottom: 20px; right: 20px; width: 58px; height: 58px; background: #1f4fff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,.25); z-index: 2000; transition: transform 0.25s ease, background 0.25s ease; } .support-call:hover { background: #0f2fe0; transform: scale(1.08); } /* Mobile touch comfort */ @media (max-width: 640px) { .support-call { width: 52px; height: 52px; font-size: 24px; bottom: 16px; right: 16px; } } .swing-once { transform-origin: top center; animation: swing 0.9s ease forwards; } /* ===== FADE UP ANIMATION ===== */ .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; } .fade-up.show { opacity: 1; transform: translateY(0); <!-- PRODUCT EMPTY NOTICE -->
-<div id="noProductsPopup" style="
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- ✅ VERY IMPORTANT FOR MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Explore | Layo’s Beauty Hub</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:#f5f3ff;
+}
+
+/* ================= HEADER ================= */
+header{
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  z-index:1000;
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+}
+
+.logo a{
+  font-size:1.1rem;
+  font-weight:800;
+  color:rgba(5,5,247,.8);
+  text-decoration:none;
+}
+
+.logo p{
+  font-size:.75rem;
+  color:#666;
+}
+
+/* Desktop nav */
+.nav-links{
+  display:none;
+  gap:26px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+}
+
+/* Hamburger */
+.hamburger-btn{
+  font-size:1.6rem;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+.hamburger-btn:hover {
+  background: blue;
+  transform: scale(1.05);
+}
+/* ================= MOBILE MENU ================= */
+.mobile-menu{
+  position:fixed;
+  top:0;
+  left:0;
+  width:260px;
+  height:100vh;
+  background:#fff;
+  padding:80px 20px;
+  transform:translateX(-100%);
+  transition:.35s ease;
+  z-index:1001;
+}
+
+.mobile-menu.active{
+  transform:translateX(0);
+}
+
+.mobile-close-btn{
+  position:absolute;
+  top:16px;
+  right:16px;
+  font-size:1.4rem;
+  background:none;
+  border:none;
+}
+
+.mobile-nav{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.mobile-nav a{
+  padding:12px;
+  border-radius:10px;
+  font-weight:600;
+  color:rgba(5,5,247,.8);
+  text-decoration:none;
+}
+
+/* OVERLAY (❗ was missing before) */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ================= PAGE ================= */
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+h1{
+  font-family:"Playfair Display",serif;
+  font-size:5rem;
+  font-weight:800;
+  color:#1f4fff;
+  margin-bottom:18px;
+}
+
+/* CONTROLS */
+#controls{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+#controls input,
+#controls select{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1.5px solid #dcd9ff;
+}
+
+/* GRID */
+#grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+
+/* CARD */
+.product-card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 14px 40px rgba(0,0,0,.12);
+}
+
+.product-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:16px;
+}
+
+.card-body h3{
+  font-size:1rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.card-body button{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  background:#4f46e5;
+  color:#fff;
+  border:none;
+  font-weight:700;
+}
+
+/* FOOTER */
+footer{
+  background:rgba(5,5,247,.8);
+  color:#fff;
+  text-align:center;
+  padding:22px;
+  margin-top:40px;
+}
+
+/* ================= TABLET ================= */
+@media(min-width:640px){
+  #grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ================= DESKTOP ================= */
+@media(min-width:768px){
+  .nav-links{display:flex}
+  .hamburger-btn{display:none}
+  #controls{flex-direction:row}
+}
+
+@media(min-width:1024px){
+  #grid{grid-template-columns:repeat(4,1fr)}
+}
+
+
+/* ===== SWING ANIMATION ===== */
+.swing {
+  transform-origin: top center;
+  animation: swing 0.9s ease;
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(6deg); }
+  40%  { transform: rotate(-4deg); }
+  60%  { transform: rotate(3deg); }
+  80%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ===== CUSTOMER SUPPORT FLOATING ICON ===== */
+.support-call {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 20px;
+  width: 58px;
+  height: 58px;
   background: #1f4fff;
   color: #fff;
-  padding: 12px 18px;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 0.9rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  text-decoration: none;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
-  z-index: 3000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-">
-  Products not available. Come back later.
-</div>
-} </style> </head> <!-- CUSTOMER SUPPORT CALL BUTTON --> <a href="tel:+2349025863408" class="support-call" aria-label="Call Customer Support"> 📞 </a> <script> /* ===== FADE UP ON LOAD ===== */ window.addEventListener("load", () => { document.querySelectorAll(".fade-up").forEach((el, i) => { setTimeout(() => { el.classList.add("show"); }, i * 120); }); }); </script> <body> <header> <div class="nav"> <div class="logo"> <img src="logo.png"> <div> <a href="index.html">LAYOS BEAUTY HUB</a> <p>Elegance • Glow • Confidence</p> </div> </div> <nav class="nav-links"> <a href="index.html">Home</a> <a href="about.html">About</a> <a href="shop.html">Shop</a> <a href="contact.html">Contact</a> </nav> <button id="mobileBtn" class="hamburger-btn">☰</button> </div> </header> <!-- ✅ Overlay added (script depends on this) --> <div id="overlay" class="overlay"></div> <div id="mobileMenu" class="mobile-menu"> <button id="mobileClose" class="mobile-close-btn">✕</button> <nav class="mobile-nav"> <a href="index.html">Home</a> <a href="about.html">About</a> <a href="exhibition.html">Exhibition</a> <a href="explore.html">Explore</a> <a href="contact.html">Contact</a> </nav> </div> <main> <h1 class="text-3xl font-bold text-blue-600 fade-up"> Explore Availabe Products </h1> <div id="controls" class="fade-up"> <input type="text" id="search" placeholder="Search products..."> <select id="filter"> <option value="all">All Categories</option> <option>Skin Care</option> <option>Hair Care</option> <option>Makeup</option> <option>Jewelries</option> </select> </div> <div id="grid"></div> </main> <footer> © 2025 LAYOS BEAUTY HUB | Developed by VT DESIGN </footer> <script> let products=JSON.parse(localStorage.getItem("products"))||defaultProducts; localStorage.setItem("products",JSON.stringify(products)); const grid=document.getElementById("grid"); const search=document.getElementById("search"); const filter=document.getElementById("filter"); function render(){ grid.innerHTML=""; products .filter(p=>p.visible) .filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase())) .filter(p=>filter.value==="all"||p.category===filter.value) .forEach(p=>{ .forEach(p=>{
-  visibleCount++;
- grid.innerHTML+= <article class="product-card swing-once"> <img src="${p.image}"> <div class="card-body fade-up"> <h3>${p.name}</h3> <button onclick="messageProduct('${p.name}')">Message</button> </div> </article>; const popup = document.getElementById("noProductsPopup");
-
-if (visibleCount === 0) {
-  popup.style.opacity = "1";
-  popup.style.transform = "translateX(-50%) translateY(0)";
-} else {
-  popup.style.opacity = "0";
-  popup.style.transform = "translateX(-50%) translateY(20px)";
+  z-index: 2000;
+  transition: transform 0.25s ease, background 0.25s ease;
 }
- }); } search.addEventListener("input",render); filter.addEventListener("change",render); render(); let visibleCount = 0;
-/* Mobile menu */ const btn=document.getElementById("mobileBtn"); const mobileMenu=document.getElementById("mobileMenu"); const closeBtn=document.getElementById("mobileClose"); const overlay=document.getElementById("overlay"); btn.onclick=()=>{ mobileMenu.classList.add("active"); overlay.classList.add("active"); }; closeBtn.onclick=overlay.onclick=()=>{ mobileMenu.classList.remove("active"); overlay.classList.remove("active"); }; </script> <script> function messageProduct(productName) { const phone = "+2349025863408"; // YOUR WhatsApp number const text = Hello, I am interested in "${productName}" from Layos Beauty Hub; const url = https://wa.me/${phone}?text=${encodeURIComponent(text)}; window.open(url, "_blank"); } </script> </body> </html>
 
+.support-call:hover {
+  background: #0f2fe0;
+  transform: scale(1.08);
+}
+
+/* Mobile touch comfort */
+@media (max-width: 640px) {
+  .support-call {
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+.swing-once {
+  transform-origin: top center;
+  animation: swing 0.9s ease forwards;
+}
+/* ===== FADE UP ANIMATION ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+</head>
+<!-- CUSTOMER SUPPORT CALL BUTTON -->
+<a href="tel:+2349025863408" class="support-call" aria-label="Call Customer Support">
+  📞
+</a>
+<script>
+/* ===== FADE UP ON LOAD ===== */
+window.addEventListener("load", () => {
+  document.querySelectorAll(".fade-up").forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add("show");
+    }, i * 120);
+  });
+});
+</script>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="logo.png">
+      <div>
+        <a href="index.html">LAYOS BEAUTY HUB</a>
+        <p>Elegance • Glow • Confidence</p>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button id="mobileBtn" class="hamburger-btn">☰</button>
+  </div>
+</header>
+
+<!-- ✅ Overlay added (script depends on this) -->
+<div id="overlay" class="overlay"></div>
+
+<div id="mobileMenu" class="mobile-menu">
+  <button id="mobileClose" class="mobile-close-btn">✕</button>
+  <nav class="mobile-nav">
+    <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="exhibition.html">Exhibition</a>
+      <a href="explore.html">Explore</a>
+      <a href="contact.html">Contact</a>
+      
+  </nav>
+</div>
+
+<main>
+<h1 class="text-3xl font-bold text-blue-600 fade-up">
+  Explore Availabe Products
+</h1>
+
+
+<div id="controls" class="fade-up">
+
+  <input type="text" id="search" placeholder="Search products...">
+  <select id="filter">
+    <option value="all">All Categories</option>
+    <option>Skin Care</option>
+    <option>Hair Care</option>
+    <option>Makeup</option>
+    <option>Jewelries</option>
+  </select>
+</div>
+
+<div id="grid"></div>
+</main>
+
+<footer>
+© 2025 LAYOS BEAUTY HUB | Developed by VT DESIGN
+</footer>
+
+<script>
+
+
+let products=JSON.parse(localStorage.getItem("products"))||defaultProducts;
+localStorage.setItem("products",JSON.stringify(products));
+
+const grid=document.getElementById("grid");
+const search=document.getElementById("search");
+const filter=document.getElementById("filter");
+
+function render(){
+  grid.innerHTML="";
+  products
+    .filter(p=>p.visible)
+    .filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase()))
+    .filter(p=>filter.value==="all"||p.category===filter.value)
+    .forEach(p=>{
+      grid.innerHTML+=`
+      <article class="product-card swing-once">
+        <img src="${p.image}">
+        <div class="card-body fade-up">
+
+          <h3>${p.name}</h3>
+          <button onclick="messageProduct('${p.name}')">Message</button>
+        </div>
+      </article>`;
+    });
+}
+
+search.addEventListener("input",render);
+filter.addEventListener("change",render);
+render();
+
+/* Mobile menu */
+const btn=document.getElementById("mobileBtn");
+const mobileMenu=document.getElementById("mobileMenu");
+const closeBtn=document.getElementById("mobileClose");
+const overlay=document.getElementById("overlay");
+
+btn.onclick=()=>{
+  mobileMenu.classList.add("active");
+  overlay.classList.add("active");
+};
+
+closeBtn.onclick=overlay.onclick=()=>{
+  mobileMenu.classList.remove("active");
+  overlay.classList.remove("active");
+};
+</script>
+<script>
+function messageProduct(productName) {
+  const phone = "+2349025863408"; // YOUR WhatsApp number
+  const text = `Hello, I am interested in "${productName}" from Layos Beauty Hub`;
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
+    
