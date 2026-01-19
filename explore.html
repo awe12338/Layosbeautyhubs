@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- ✅ VERY IMPORTANT FOR MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Explore | Layo’s Beauty Hub</title>
@@ -13,6 +12,12 @@
 
 <style>
 *{box-sizing:border-box}
+
+html, body{
+  width:100%;
+  max-width:100%;
+  overflow-x:clip;
+}
 
 body{
   margin:0;
@@ -81,10 +86,7 @@ header{
   border:none;
   cursor:pointer;
 }
-.hamburger-btn:hover {
-  background: blue;
-  transform: scale(1.05);
-}
+
 /* ================= MOBILE MENU ================= */
 .mobile-menu{
   position:fixed;
@@ -126,7 +128,7 @@ header{
   text-decoration:none;
 }
 
-/* OVERLAY (❗ was missing before) */
+/* Overlay */
 .overlay{
   position:fixed;
   inset:0;
@@ -151,7 +153,7 @@ main{
 
 h1{
   font-family:"Playfair Display",serif;
-  font-size:5rem;
+  font-size:2.2rem;
   font-weight:800;
   color:#1f4fff;
   margin-bottom:18px;
@@ -196,255 +198,3 @@ h1{
 
 .card-body{
   padding:16px;
-}
-
-.card-body h3{
-  font-size:1rem;
-  font-weight:800;
-  margin-bottom:12px;
-}
-
-.card-body button{
-  width:100%;
-  padding:12px;
-  border-radius:14px;
-  background:#4f46e5;
-  color:#fff;
-  border:none;
-  font-weight:700;
-}
-
-/* FOOTER */
-footer{
-  background:rgba(5,5,247,.8);
-  color:#fff;
-  text-align:center;
-  padding:22px;
-  margin-top:40px;
-}
-
-/* ================= TABLET ================= */
-@media(min-width:640px){
-  #grid{grid-template-columns:repeat(2,1fr)}
-}
-
-/* ================= DESKTOP ================= */
-@media(min-width:768px){
-  .nav-links{display:flex}
-  .hamburger-btn{display:none}
-  #controls{flex-direction:row}
-}
-
-@media(min-width:1024px){
-  #grid{grid-template-columns:repeat(4,1fr)}
-}
-
-
-/* ===== SWING ANIMATION ===== */
-.swing {
-  transform-origin: top center;
-  animation: swing 0.9s ease;
-}
-
-@keyframes swing {
-  0%   { transform: rotate(0deg); }
-  20%  { transform: rotate(6deg); }
-  40%  { transform: rotate(-4deg); }
-  60%  { transform: rotate(3deg); }
-  80%  { transform: rotate(-2deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* ===== CUSTOMER SUPPORT FLOATING ICON ===== */
-.support-call {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 58px;
-  height: 58px;
-  background: #1f4fff;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  text-decoration: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,.25);
-  z-index: 2000;
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.support-call:hover {
-  background: #0f2fe0;
-  transform: scale(1.08);
-}
-
-/* Mobile touch comfort */
-@media (max-width: 640px) {
-  .support-call {
-    width: 52px;
-    height: 52px;
-    font-size: 24px;
-    bottom: 16px;
-    right: 16px;
-  }
-}
-.swing-once {
-  transform-origin: top center;
-  animation: swing 0.9s ease forwards;
-}
-/* ===== FADE UP ANIMATION ===== */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-</style>
-</head>
-<!-- CUSTOMER SUPPORT CALL BUTTON -->
-<a href="tel:+2349025863408" class="support-call" aria-label="Call Customer Support">
-  📞
-</a>
-<script>
-/* ===== FADE UP ON LOAD ===== */
-window.addEventListener("load", () => {
-  document.querySelectorAll(".fade-up").forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.add("show");
-    }, i * 120);
-  });
-});
-</script>
-
-<body>
-
-<header>
-  <div class="nav">
-    <div class="logo">
-      <img src="logo.png">
-      <div>
-        <a href="index.html">LAYOS BEAUTY HUB</a>
-        <p>Elegance • Glow • Confidence</p>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-
-    <button id="mobileBtn" class="hamburger-btn">☰</button>
-  </div>
-</header>
-
-<!-- ✅ Overlay added (script depends on this) -->
-<div id="overlay" class="overlay"></div>
-
-<div id="mobileMenu" class="mobile-menu">
-  <button id="mobileClose" class="mobile-close-btn">✕</button>
-  <nav class="mobile-nav">
-    <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="exhibition.html">Exhibition</a>
-      <a href="explore.html">Explore</a>
-      <a href="contact.html">Contact</a>
-      
-  </nav>
-</div>
-
-<main>
-<h1 class="text-3xl font-bold text-blue-600 fade-up">
-  Explore Availabe Products
-</h1>
-
-
-<div id="controls" class="fade-up">
-
-  <input type="text" id="search" placeholder="Search products...">
-  <select id="filter">
-    <option value="all">All Categories</option>
-    <option>Skin Care</option>
-    <option>Hair Care</option>
-    <option>Makeup</option>
-    <option>Jewelries</option>
-  </select>
-</div>
-
-<div id="grid"></div>
-</main>
-
-<footer>
-© 2025 LAYOS BEAUTY HUB | Developed by VT DESIGN
-</footer>
-
-<script>
-
-
-let products=JSON.parse(localStorage.getItem("products"))||defaultProducts;
-localStorage.setItem("products",JSON.stringify(products));
-
-const grid=document.getElementById("grid");
-const search=document.getElementById("search");
-const filter=document.getElementById("filter");
-
-function render(){
-  grid.innerHTML="";
-  products
-    .filter(p=>p.visible)
-    .filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase()))
-    .filter(p=>filter.value==="all"||p.category===filter.value)
-    .forEach(p=>{
-      grid.innerHTML+=`
-      <article class="product-card swing-once">
-        <img src="${p.image}">
-        <div class="card-body fade-up">
-
-          <h3>${p.name}</h3>
-          <button onclick="messageProduct('${p.name}')">Message</button>
-        </div>
-      </article>`;
-    });
-}
-
-search.addEventListener("input",render);
-filter.addEventListener("change",render);
-render();
-
-/* Mobile menu */
-const btn=document.getElementById("mobileBtn");
-const mobileMenu=document.getElementById("mobileMenu");
-const closeBtn=document.getElementById("mobileClose");
-const overlay=document.getElementById("overlay");
-
-btn.onclick=()=>{
-  mobileMenu.classList.add("active");
-  overlay.classList.add("active");
-};
-
-closeBtn.onclick=overlay.onclick=()=>{
-  mobileMenu.classList.remove("active");
-  overlay.classList.remove("active");
-};
-</script>
-<script>
-function messageProduct(productName) {
-  const phone = "+2349025863408"; // YOUR WhatsApp number
-  const text = `Hello, I am interested in "${productName}" from Layos Beauty Hub`;
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-  window.open(url, "_blank");
-}
-</script>
-
-</body>
-</html>
-
-
