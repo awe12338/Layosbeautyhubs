@@ -8,7 +8,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-  
+  /* ===== FORM WIDTH FIX (CRITICAL) ===== */
+input,
+textarea,
+select {
+  max-width: 100%;
+  width: 100%;
+}
+/* Prevent grid overflow on mobile */
+.grid {
+  min-width: 0;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
 /* ================= GLOBAL ================= */
  body { font-family: "Poppins", sans-serif; }
     h1,h2,h3,h4 { font-family: "Playfair Display", serif; }
@@ -370,6 +385,17 @@ footer {
   will-change: transform;
   backface-visibility: hidden;
 }
+/* ===== MOBILE SAFETY FIX ===== */
+@media (max-width: 480px) {
+  main {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .shadow-fade {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  }
+}
 
 </style>
 </head>
@@ -536,6 +562,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
