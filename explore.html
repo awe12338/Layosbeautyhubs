@@ -387,16 +387,7 @@ window.addEventListener("load", () => {
 </footer>
 
 <script>
-// ===== PRELOADED PRODUCTS =====
-let defaultProducts=[];
-for(let i=1;i<=30;i++){
-  defaultProducts.push({
-    id:i,
-    name:`Product ${i}`,
-    category:["Skin Care","Hair Care","Makeup","Jewelries"][i%4],
-    visible:true
-  });
-}
+
 
 let products=JSON.parse(localStorage.getItem("products"))||defaultProducts;
 localStorage.setItem("products",JSON.stringify(products));
@@ -455,4 +446,5 @@ function messageProduct(productName) {
 
 </body>
 </html>
+
 
