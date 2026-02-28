@@ -1,314 +1,158 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Layos Beauty Hub | Admin</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Poppins,sans-serif;
-  background:linear-gradient(135deg,#f5f3ff,#4f46e5,#1e1b4b);
-  min-height:100vh;
-}
-
-/* ===== NAVBAR ===== */
-.navbar{
-  position:sticky;
-  top:0;
-  background:#fff;
-  padding:14px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 8px 25px rgba(0,0,0,.15);
-  z-index:100;
-}
-
-.navbar h1{
-  font-size:18px;
-  font-weight:700;
-  color:#1f4fff;
-}
-
-/* ===== LAYOUT ===== */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:22px;
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
-}
-
-/* ===== LOGIN ===== */
-#loginPanel{
-  max-width:380px;
-  margin:80px auto;
-  text-align:center;
-}
-
-#loginPanel input{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  margin-bottom:14px;
-}
-
-#loginPanel button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#4f46e5;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* ===== FORM ===== */
-input,select,button{
-  font-family:Poppins,sans-serif;
-}
-
-input,select{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  margin-bottom:12px;
-}
-
-button{
-  padding:12px 16px;
-  border-radius:12px;
-  border:none;
-  background:#4f46e5;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* ===== PRODUCT LIST ===== */
-.product-item{
-  display:grid;
-  grid-template-columns:70px 1fr;
-  gap:14px;
-  align-items:start;
-  background:#f9fafb;
-  padding:16px;
-  border-radius:16px;
-  margin-bottom:16px;
-}
-
-.product-item img{
-  width:70px;
-  height:70px;
-  border-radius:12px;
-  object-fit:cover;
-}
-
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.actions button{
-  font-size:13px;
-  padding:8px 12px;
-}
-
-.hide{background:#f59e0b}
-.delete{background:#dc2626}
-
-/* ===== DESKTOP ===== */
-@media(min-width:768px){
-  .product-item{
-    grid-template-columns:80px 1fr 180px;
-    align-items:center;
-  }
-}
-</style>
+<title>Admin Login | Layos Beauty Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-100 p-6">
 
-<!-- NAV -->
-<div class="navbar">
-  <h1>Layos Beauty Hub — Admin</h1>
-</div>
+<!-- LOGIN SECTION -->
+<div id="loginSection" class="max-w-md mx-auto mt-20 bg-white p-6 rounded-xl shadow">
 
-<div class="container">
+  <h2 class="text-2xl font-bold mb-4 text-blue-600">
+    Admin Login
+  </h2>
 
-<!-- LOGIN -->
-<div id="loginPanel" class="card">
-  <h2>Admin Login</h2>
-  <input type="password" id="password" placeholder="Enter admin password">
-  <button onclick="login()">Login</button>
+  <input type="password" id="adminPassword"
+  placeholder="Enter Admin Password"
+  class="w-full p-3 border rounded mb-4">
+
+  <button onclick="checkPassword()"
+  class="bg-blue-600 text-white w-full py-3 rounded">
+  Login
+  </button>
+
 </div>
 
 <!-- ADMIN PANEL -->
-<div id="adminPanel" style="display:none">
+<div id="adminPanel" style="display:none;">
 
-  <!-- ADD PRODUCT -->
-  <div class="card">
-    <h2>Add Product</h2>
+<h1 class="text-3xl font-bold mb-6 text-blue-600">
+Admin Panel – Add Product
+</h1>
 
-    <input id="name" placeholder="Product name">
-    <input type="file" id="imageFile" accept="image/*">
+<div class="bg-white p-6 rounded-xl shadow-md mb-8 max-w-xl">
+  
+  <input id="name" placeholder="Product Name"
+  class="w-full p-3 border rounded mb-3">
 
-    <select id="category">
-      <option>Skin Care</option>
-      <option>Hair Care</option>
-      <option>Makeup</option>
-      <option>Jewelries</option>
-    </select>
+  <input id="image" placeholder="Image URL"
+  class="w-full p-3 border rounded mb-3">
 
-    <button onclick="addProduct()">Add Product</button>
-  </div>
+  <select id="category"
+  class="w-full p-3 border rounded mb-3">
+    <option>Skin Care</option>
+    <option>Hair Care</option>
+    <option>Makeup</option>
+    <option>Jewelries</option>
+  </select>
 
-  <!-- PRODUCT LIST -->
-  <div class="card">
-    <h2>All Products</h2>
-    <div id="adminList"></div>
-  </div>
+  <button onclick="addProduct()"
+  class="bg-blue-600 text-white px-6 py-3 rounded w-full">
+  Add Product
+  </button>
 
 </div>
+
+<h2 class="text-xl font-bold mb-4">All Products</h2>
+<div id="productList" class="grid gap-4"></div>
+
 </div>
 
-<script>
-/* ===== CONFIG ===== */
-const PASSWORD = "layos123";
-const STORAGE_KEY = "products";
+<script type="module">
 
-/* ===== ELEMENTS ===== */
-const loginPanel = document.getElementById("loginPanel");
-const adminPanel = document.getElementById("adminPanel");
-const adminList = document.getElementById("adminList");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* ===== DATA ===== */
-let products = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+/* 🔥 PASTE YOUR FIREBASE CONFIG HERE */
+const firebaseConfig = {
+  apiKey: "AIzaSyBPNuTAFLG3QtOwHdrvvEbUR34bVrJHCFA",
+  authDomain: "layos-beauty-hub.firebaseapp.com",
+  projectId: "layos-beauty-hub",
+  storageBucket: "layos-beauty-hub.firebasestorage.app",
+  messagingSenderId: "1070014027832",
+  appId: "1:1070014027832:web:1979a9f2af322aa7932ecd"
+};
 
-/* ===== LOGIN ===== */
-function login(){
-  const pass = document.getElementById("password").value;
-  if(pass === PASSWORD){
-    loginPanel.style.display="none";
-    adminPanel.style.display="block";
-    renderAdmin();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const productList = document.getElementById("productList");
+
+/* 🔐 CHANGE THIS PASSWORD */
+const ADMIN_PASSWORD = "layos123";
+
+window.checkPassword = function(){
+
+  const entered = document.getElementById("adminPassword").value;
+
+  if(entered === ADMIN_PASSWORD){
+    document.getElementById("loginSection").style.display="none";
+    document.getElementById("adminPanel").style.display="block";
+    loadProducts();
   }else{
-    alert("Wrong password");
+    alert("Wrong Password!");
   }
-}
+};
 
-/* ===== SAVE ===== */
-function save(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-  renderAdmin();
-}
+window.addProduct = async function(){
 
-/* ===== ADD ===== */
-function addProduct(){
-  const name = document.getElementById("name").value.trim();
-  const file = document.getElementById("imageFile");
+  const name = document.getElementById("name").value;
+  const image = document.getElementById("image").value;
   const category = document.getElementById("category").value;
 
-  if(!name || file.files.length === 0){
-    alert("Fill all fields");
+  if(!name || !image){
+    alert("Please fill all fields");
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = e => {
-    products.push({
-      id: Date.now(),
-      name,
-      image: e.target.result,
-      category,
-      visible: true
-    });
-    save();
-    document.getElementById("name").value="";
-    file.value="";
-  };
-  reader.readAsDataURL(file.files[0]);
-}
+  await addDoc(collection(db, "products"), {
+    name,
+    image,
+    category
+  });
 
-/* ===== RENDER ===== */
-function renderAdmin(){
-  adminList.innerHTML = "";
-  products.forEach(p=>{
-    adminList.innerHTML += `
-      <div class="product-item">
-        <img src="${p.image}">
+  alert("Product Added Successfully!");
+
+  document.getElementById("name").value="";
+  document.getElementById("image").value="";
+
+  loadProducts();
+};
+
+async function loadProducts(){
+  productList.innerHTML="";
+  const querySnapshot = await getDocs(collection(db, "products"));
+
+  querySnapshot.forEach((document) => {
+    const p = document.data();
+
+    productList.innerHTML += `
+      <div class="bg-white p-4 rounded shadow flex justify-between items-center">
         <div>
-          <input value="${p.name}" onchange="editName(${p.id},this.value)">
-          <select onchange="editCategory(${p.id},this.value)">
-            <option ${p.category=="Skin Care"?"selected":""}>Skin Care</option>
-            <option ${p.category=="Hair Care"?"selected":""}>Hair Care</option>
-            <option ${p.category=="Makeup"?"selected":""}>Makeup</option>
-            <option ${p.category=="Jewelries"?"selected":""}>Jewelries</option>
-          </select>
-
-          <input type="file" accept="image/*" onchange="editImage(${p.id},this)">
+          <p class="font-bold">${p.name}</p>
+          <img src="${p.image}" class="w-20 mt-2 rounded">
         </div>
-
-        <div class="actions">
-          <button class="hide" onclick="toggle(${p.id})">
-            ${p.visible ? "Hide" : "Show"}
-          </button>
-          <button class="delete" onclick="removeItem(${p.id})">
-            Delete
-          </button>
-        </div>
+        <button onclick="deleteProduct('${document.id}')"
+        class="bg-red-500 text-white px-4 py-2 rounded">
+        Delete
+        </button>
       </div>
     `;
   });
 }
 
-/* ===== EDIT ===== */
-function toggle(id){
-  const p = products.find(x=>x.id===id);
-  p.visible = !p.visible;
-  save();
-}
+window.deleteProduct = async function(id){
+  await deleteDoc(doc(db, "products", id));
+  loadProducts();
+};
 
-function removeItem(id){
-  products = products.filter(p=>p.id!==id);
-  save();
-}
-
-function editName(id,val){
-  products.find(p=>p.id===id).name = val;
-  save();
-}
-
-function editCategory(id,val){
-  products.find(p=>p.id===id).category = val;
-  save();
-}
-
-function editImage(id,input){
-  if(!input.files.length) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    products.find(p=>p.id===id).image=e.target.result;
-    save();
-  };
-  reader.readAsDataURL(input.files[0]);
-}
 </script>
 
 </body>
