@@ -1,51 +1,65 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Login | Layos Beauty Hub</title>
+<title>Layos Admin Dashboard</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-6">
+<body class="bg-gradient-to-br from-pink-100 to-blue-100 min-h-screen p-6">
 
 <!-- LOGIN SECTION -->
-<div id="loginSection" class="max-w-md mx-auto mt-20 bg-white p-6 rounded-xl shadow">
+<div id="loginSection" class="flex items-center justify-center min-h-screen">
 
-  <h2 class="text-2xl font-bold mb-4 text-blue-600">
-    Admin Login
-  </h2>
+  <div class="bg-white/70 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
 
-  <input type="password" id="adminPassword"
-  placeholder="Enter Admin Password"
-  class="w-full p-3 border rounded mb-4">
+    <img src="https://i.imgur.com/yourlogo.png" class="w-20 mx-auto mb-4">
 
-  <button onclick="checkPassword()"
-  class="bg-blue-600 text-white w-full py-3 rounded">
-  Login
-  </button>
+    <h2 class="text-3xl font-bold text-pink-600 mb-6">
+      Layos Beauty Admin
+    </h2>
+
+    <input type="password" id="adminPassword"
+    placeholder="Enter Admin Password"
+    class="w-full p-3 border rounded-lg mb-4 focus:outline-pink-400">
+
+    <button onclick="checkPassword()"
+    class="bg-pink-600 hover:bg-pink-700 text-white w-full py-3 rounded-lg transition">
+    Login
+    </button>
+
+  </div>
 
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="adminPanel" style="display:none;">
 
-<h1 class="text-3xl font-bold mb-6 text-blue-600">
-Admin Panel – Add Product
-</h1>
+<div class="flex justify-between items-center mb-8">
+  <h1 class="text-3xl font-bold text-pink-600">
+    Layos Admin Dashboard
+  </h1>
 
-<div class="bg-white p-6 rounded-xl shadow-md mb-8 max-w-xl">
-  
+  <button onclick="logout()"
+  class="bg-gray-800 text-white px-4 py-2 rounded-lg">
+  Logout
+  </button>
+</div>
+
+<!-- ADD PRODUCT CARD -->
+<div class="bg-white p-6 rounded-2xl shadow-lg mb-10 max-w-xl">
+
+  <h2 class="text-xl font-bold mb-4">Add New Product</h2>
+
   <input id="name" placeholder="Product Name"
-  class="w-full p-3 border rounded mb-3">
+  class="w-full p-3 border rounded-lg mb-3">
 
   <input id="image" placeholder="Image URL"
-  class="w-full p-3 border rounded mb-3">
+  class="w-full p-3 border rounded-lg mb-3">
 
   <select id="category"
-  class="w-full p-3 border rounded mb-3">
+  class="w-full p-3 border rounded-lg mb-3">
     <option>Skin Care</option>
     <option>Hair Care</option>
     <option>Makeup</option>
@@ -53,43 +67,40 @@ Admin Panel – Add Product
   </select>
 
   <button onclick="addProduct()"
-  class="bg-blue-600 text-white px-6 py-3 rounded w-full">
+  class="bg-pink-600 text-white px-6 py-3 rounded-lg w-full hover:bg-pink-700">
   Add Product
   </button>
 
 </div>
 
-<h2 class="text-xl font-bold mb-4">All Products</h2>
-<div id="productList" class="grid gap-4"></div>
+<h2 class="text-2xl font-bold mb-4">All Products</h2>
+
+<div id="productList" class="grid md:grid-cols-2 gap-6"></div>
 
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } 
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* 🔥 PASTE YOUR FIREBASE CONFIG HERE */
 const firebaseConfig = {
-  apiKey: "AIzaSyBPNuTAFLG3QtOwHdrvvEbUR34bVrJHCFA",
-  authDomain: "layos-beauty-hub.firebaseapp.com",
-  projectId: "layos-beauty-hub",
-  storageBucket: "layos-beauty-hub.firebasestorage.app",
-  messagingSenderId: "1070014027832",
-  appId: "1:1070014027832:web:1979a9f2af322aa7932ecd"
+  apiKey: "YOUR KEY",
+  authDomain: "YOUR DOMAIN",
+  projectId: "YOUR ID",
+  storageBucket: "YOUR STORAGE",
+  messagingSenderId: "YOUR MSG ID",
+  appId: "YOUR APP ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const productList = document.getElementById("productList");
-
-/* 🔐 CHANGE THIS PASSWORD */
 const ADMIN_PASSWORD = "layos123";
 
 window.checkPassword = function(){
-
   const entered = document.getElementById("adminPassword").value;
 
   if(entered === ADMIN_PASSWORD){
@@ -101,6 +112,11 @@ window.checkPassword = function(){
   }
 };
 
+window.logout = function(){
+  document.getElementById("loginSection").style.display="flex";
+  document.getElementById("adminPanel").style.display="none";
+};
+
 window.addProduct = async function(){
 
   const name = document.getElementById("name").value;
@@ -108,7 +124,7 @@ window.addProduct = async function(){
   const category = document.getElementById("category").value;
 
   if(!name || !image){
-    alert("Please fill all fields");
+    alert("Fill all fields");
     return;
   }
 
@@ -118,11 +134,9 @@ window.addProduct = async function(){
     category
   });
 
-  alert("Product Added Successfully!");
-
+  alert("Product Added!");
   document.getElementById("name").value="";
   document.getElementById("image").value="";
-
   loadProducts();
 };
 
@@ -134,15 +148,22 @@ async function loadProducts(){
     const p = document.data();
 
     productList.innerHTML += `
-      <div class="bg-white p-4 rounded shadow flex justify-between items-center">
-        <div>
-          <p class="font-bold">${p.name}</p>
-          <img src="${p.image}" class="w-20 mt-2 rounded">
+      <div class="bg-white p-4 rounded-2xl shadow-lg">
+        <img src="${p.image}" class="w-full h-40 object-cover rounded-lg mb-3">
+        <p class="font-bold text-lg">${p.name}</p>
+        <p class="text-sm text-gray-500 mb-3">${p.category}</p>
+
+        <div class="flex gap-2">
+          <button onclick="editProduct('${document.id}','${p.name}','${p.image}','${p.category}')"
+          class="bg-yellow-500 text-white px-3 py-2 rounded-lg w-full">
+          Edit
+          </button>
+
+          <button onclick="deleteProduct('${document.id}')"
+          class="bg-red-500 text-white px-3 py-2 rounded-lg w-full">
+          Delete
+          </button>
         </div>
-        <button onclick="deleteProduct('${document.id}')"
-        class="bg-red-500 text-white px-4 py-2 rounded">
-        Delete
-        </button>
       </div>
     `;
   });
@@ -150,6 +171,23 @@ async function loadProducts(){
 
 window.deleteProduct = async function(id){
   await deleteDoc(doc(db, "products", id));
+  loadProducts();
+};
+
+window.editProduct = async function(id, oldName, oldImage, oldCategory){
+
+  const newName = prompt("Edit Product Name:", oldName);
+  const newImage = prompt("Edit Image URL:", oldImage);
+  const newCategory = prompt("Edit Category:", oldCategory);
+
+  if(!newName || !newImage) return;
+
+  await updateDoc(doc(db,"products",id),{
+    name:newName,
+    image:newImage,
+    category:newCategory
+  });
+
   loadProducts();
 };
 
