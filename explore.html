@@ -161,13 +161,13 @@ loadProducts();
 /* WhatsApp */
 window.messageProduct = function(productName){
   const phone = "2349025863408";
-  const text = `Hello, I am interested in "${productName}" from Layos Beauty Hub`;
+  const text = `Hello, I am interested in "${productName}" from Layos Beauty Hub store`;
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`,"_blank");
 }
 
 /* Share */
 window.shareProduct = function(productName){
-  const text = `Check out "${productName}" on Layos Beauty Hub`;
+  const text = `Check out "${productName}" on Layos Beauty Hub store`;
   const url = window.location.href;
 
   if(navigator.share){
@@ -190,3 +190,4 @@ closeBtn.onclick=overlay.onclick=()=>{mobileMenu.classList.remove("active");over
 
 </body>
 </html>
+
